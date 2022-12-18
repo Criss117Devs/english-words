@@ -15,7 +15,9 @@ const signIn = async (req, res, next) => {
 
     const addUser = await createUser(email, firstName, lastNameF, lastNameM, password, status, about);
 
-    console.log(addUser);
+    res.status(200).json({
+        ok: "ok"
+    })
 
     next();
 
