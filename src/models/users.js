@@ -10,6 +10,14 @@ const createUser = async (email, firstName, lastNameF, lastNameM, password, stat
     return userAdded;
 }
 
+const login = async (email, password) => {
+    const access = await pool.query(`
+        SELECT * FROM ${usersTable} WHERE email = ${email} && password = ${password}`
+        [password, email]
+    );
+}
+
 module.exports = {
-    createUser
+    createUser,
+    login
 }

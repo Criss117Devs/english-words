@@ -1,5 +1,5 @@
 
-const { createUser } = require("../models/users");
+const { createUser, login } = require("../models/users");
 
 const signIn = async (req, res, next) => {
 
@@ -23,6 +23,24 @@ const signIn = async (req, res, next) => {
 
 }
 
+const loginUser = async (req, res, next) => {
+    
+    const {
+        email = "",
+        password = ""
+    } = req.body;
+
+    const exist = await login(email, password);
+
+    res.status(200).json({
+        ok: "ok"
+    });
+
+    next();
+
+}
+
 module.exports = {
-    signIn
+    signIn,
+    loginUser
 }
