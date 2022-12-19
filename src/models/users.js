@@ -13,7 +13,7 @@ const createUser = async (email, firstName, lastNameF, lastNameM, password, stat
 const login = async (email, password) => {
     const access = await pool.query(`
         SELECT * FROM ${usersTable} WHERE email = ${email} && password = ${password}`
-        [password, email]
+        [email, password]
     );
 }
 
