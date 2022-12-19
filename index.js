@@ -3,6 +3,7 @@ const cors = require('cors');
 
 // Routes path
 const { routerUsers } = require("./src/routes/users");
+const { routerWords } = require("./src/routes/words");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 
 // Routes.
 app.use("/users", routerUsers);
+app.use("/words", routerWords);
 
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
