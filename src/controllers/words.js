@@ -4,6 +4,7 @@ const { createWord } = require("../models/words");
 const create = async (req, res, next) => {
 
     const {
+        idUser = 25,
         word = "",
         meaning = "",
         adjective = "",
@@ -12,7 +13,7 @@ const create = async (req, res, next) => {
         status = "active"
     } = req.body;
 
-    const addUser = await createWord(word, meaning, adjective, noun, added, status);
+    const addUser = await createWord(idUser, word, meaning, adjective, noun, added, status);
 
     res.status(200).json({
         ok: "ok"
