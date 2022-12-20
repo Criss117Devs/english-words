@@ -25,9 +25,9 @@ const create = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
 
-    const {idUser = 25} = req.body;
+    //const {idUser = 25} = req.body;
 
-    const allRows = await getAllWords(idUser);
+    const allRows = await getAllWords(25);
 
     res.status(200).json({
         ok: "ok",
