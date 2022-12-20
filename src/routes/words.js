@@ -5,7 +5,7 @@ const routerWords = Router();
 
 routerWords.post("/create", create);
 
-routerWords.post("/getAll", getAll);
+routerWords.get("/getAll", getAll);
 
 module.exports = {
     routerWords
