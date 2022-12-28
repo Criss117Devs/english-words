@@ -33,7 +33,10 @@ const loginUser = async (req, res, next) => {
     const exist = await login(email, password);
 
     res.status(200).json({
-        ok: "ok"
+        ok: "ok",
+        body: {
+            data: exist
+        }
     });
 
     next();
