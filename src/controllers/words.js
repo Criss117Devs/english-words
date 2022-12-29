@@ -1,5 +1,5 @@
 
-const { createWord, getAllWords } = require("../models/words");
+const { createWord, updateWord, getAllWords } = require("../models/words");
 
 const create = async (req, res, next) => {
 
@@ -23,6 +23,33 @@ const create = async (req, res, next) => {
 
 }
 
+const update = await = async(req, res, next) => {
+
+    const {
+        id = 2,
+        idUser = 25,
+        word = "",
+        meaning = "",
+        adjective = "",
+        noun = "",
+        added = "",
+        status = "active"
+    } = req.body;
+
+    const [success]= await updateWord(id, idUser, word, meaning, adjective, noun, added, status);
+
+    console.log(success);
+
+    res.status(200).json({
+        ok: "ok",
+        body:{
+            data: success[0]
+        }
+    });
+
+    next();
+}
+
 const getAll = async (req, res, next) => {
 
     //const {idUser = 25} = req.body;
@@ -43,5 +70,6 @@ const getAll = async (req, res, next) => {
 
 module.exports = {
     create,
+    update,
     getAll
 }

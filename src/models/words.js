@@ -3,11 +3,19 @@ const pool = require("../utils/db");
 const wordsTable = "words";
 
 const createWord = async (idUser, word, meaning, adjective, noun, added, status) => {
-    const userAdded = await pool.query(
+    const insert = await pool.query(
         `INSERT INTO ${wordsTable} (idUser, word, meaning, adjective, noun, added, status) VALUES (?, ?, ?, ?, ?, ?, ?)`,
         [idUser, word, meaning, adjective, noun, added, status]
     );
-    return userAdded;
+    return insert;
+}
+
+const updateWord = async (id, idUser, word, meaning, adjective, noun, added, status) => {
+    const update = await pool.query(
+        `UPDATE ${wordsTable} SET word = ?, meaning = ?, adjective = ?, noun = ?, added = ?, status = ? WHERE id = ? && idUSER = ?`,
+        [word, meaning, adjective, noun, added, status, id, idUser]
+    );
+    return update;
 }
 
 const getAllWords = async (idUser) => {
@@ -15,12 +23,12 @@ const getAllWords = async (idUser) => {
         `SELECT * FROM ${wordsTable} WHERE idUser = ?`,
         [idUser]
     );
-    console.log(allRows);
     return allRows;
 }
 
 module.exports = {
     createWord,
+    updateWord,
     getAllWords
     
 }
