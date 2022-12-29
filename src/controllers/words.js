@@ -42,9 +42,7 @@ const update = await = async(req, res, next) => {
 
     res.status(200).json({
         ok: "ok",
-        body:{
-            data: success[0]
-        }
+        body:{}
     });
 
     next();
