@@ -35,7 +35,7 @@ const loginUser = async (req, res, next) => {
     res.status(200).json({
         ok: "ok",
         body: {
-            data: exist
+            data: exist[0]
         }
     });
 

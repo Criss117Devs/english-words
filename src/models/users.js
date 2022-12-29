@@ -9,12 +9,13 @@ const createUser = async (email, firstName, lastNameF, lastNameM, password, stat
     );
     return userAdded;
 }
-
+//const [row] = await pool.query("SELECT * FROM users WHERE key_value_string = ?", [email]);
 const login = async (email, password) => {
     const access = await pool.query(`
-        SELECT * FROM ${usersTable} WHERE email = "${email}" && password = "${password}"`,
+        SELECT * FROM ${usersTable} WHERE email = ? && password = ?`,
         [email, password]
     );
+    return access;
 }
 
 module.exports = {
