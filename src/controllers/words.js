@@ -9,7 +9,7 @@ const create = async (req, res, next) => {
         meaning = "",
         adjective = "",
         noun = "",
-        added = "01/01/2023",
+        added = "",
         status = "active"
     } = req.body;
 
