@@ -38,8 +38,6 @@ const update = await = async(req, res, next) => {
 
     const [success]= await updateWord(id, idUser, word, meaning, adjective, noun, added, status);
 
-    console.log(success);
-
     res.status(200).json({
         ok: "ok",
         body:{}
