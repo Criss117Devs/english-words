@@ -13,7 +13,8 @@ const create = async(req, res, next) => {
     const addNote = await createNote(idUser, note, added, status, topic);
 
     res.status(200).json({
-        ok: "ok"
+        ok: "ok",
+        body: {}
     });
 
     next();
