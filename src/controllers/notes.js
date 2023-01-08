@@ -6,10 +6,11 @@ const create = async(req, res, next) => {
         idUser = 25,
         note = "I love star wars",
         added = "01/01/2023",
-        status = "active"
+        status = "active",
+        topic = ""
     } = req.body;
 
-    const addNote = await createNote(idUser, note, added, status);
+    const addNote = await createNote(idUser, note, added, status, topic);
 
     res.status(200).json({
         ok: "ok"

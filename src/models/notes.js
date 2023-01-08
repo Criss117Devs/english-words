@@ -2,15 +2,15 @@ const pool = require("../utils/db");
 
 const notesTable = "notes";
 
-const createNote = async (idUser, note, added, status) => {
+const createNote = async (idUser, note, added, status, topic) => {
     const insert = await pool.query(
-        `INSERT INTO ${notesTable} (idUser, note, added, status) VALUES (?, ?, ?, ?)`,
-        [idUser, note, added, status]
+        `INSERT INTO ${notesTable} (idUser, note, added, status, topic) VALUES (?, ?, ?, ?, ?)`,
+        [idUser, note, added, status, topic]
     );
     return insert;
 }
 
-const updateNote = async (idUser, word, meaning, adjective, noun, added, status) => {
+const updateNote = async (idUser, word, meaning, adjective, noun, added, status, topic) => {
     
 }
 
