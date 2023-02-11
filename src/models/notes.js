@@ -10,16 +10,34 @@ const createNote = async (idUser, note, added, status, topic) => {
     return insert;
 }
 
-const updateNote = async (idUser, word, meaning, adjective, noun, added, status, topic) => {
-    
+const updateNote = async (id, idUser, note, added, status, topic) => {
+    try {
+
+        const update = await pool.query(
+            `UPDATE ${notesTable} SET  note = ?, added = ?, status = ?, topic = ? WHERE id = ? AND idUser = ?`,
+            [note, added, status, topic, id, idUser]
+        );
+
+        return 200;
+
+    } catch (error) {
+        
+        return {
+            error: error
+        }
+    }
 }
 
 const getAllNotes = async (idUser) => {
-    const [allRows] = await pool.query(
-        `SELECT * FROM ${notesTable} WHERE idUser = ?`,
-        [idUser]
-    );
-    return allRows;
+    try {
+        const [allRows] = await pool.query(
+            `SELECT * FROM ${notesTable} WHERE idUser = ?`,
+            [idUser]
+        );
+        return allRows;
+    } catch (error) {
+        return error;
+    }
 }
 
 module.exports = {
