@@ -1,7 +1,7 @@
 
 const { createWord, updateWord, getAllWords } = require("../models/words");
 
-const create = async (req, res, next) => {
+const create = async ( req, res) => {
 
     const {
         idUser = 25,
@@ -9,21 +9,19 @@ const create = async (req, res, next) => {
         meaning = "",
         adjective = "",
         noun = "",
+        adverb = "",
         added = "",
         status = "active"
     } = req.body;
 
-    const addUser = await createWord(idUser, word, meaning, adjective, noun, added, status);
+    const addWord = await createWord(idUser, word, meaning, adjective, noun, adverb, added, status);
 
-    res.status(200).json({
-        ok: "ok"
-    });
+    if(addWord.code !== 200) return res.status(500).json(addWord.error); // add custom msg.
 
-    next();
-
+    return res.status(addWord.code).json({ msj: "Word added." });
 }
 
-const update = await = async(req, res, next) => {
+const update = await = async(req, res) => {
 
     const {
         id = 2,
@@ -32,36 +30,30 @@ const update = await = async(req, res, next) => {
         meaning = "",
         adjective = "",
         noun = "",
+        adverb = "",
         added = "",
         status = "active"
     } = req.body;
 
-    const [success]= await updateWord(id, idUser, word, meaning, adjective, noun, added, status);
+    const setWord = await updateWord(id, idUser, word, meaning, adjective, noun, adverb, added, status);
 
-    res.status(200).json({
-        ok: "ok",
-        body:{}
-    });
+    if(setWord.code !== 200) return res.status(500).json(setWord.error);
 
-    next();
+    return res.status(setWord.code).json({ msj: "Update word." });
 }
 
-const getAll = async (req, res, next) => {
+const getAll = async (req, res) => {
 
-    //const {idUser = 25} = req.body;
+    const selectAll = await getAllWords(25);
 
-    const allRows = await getAllWords(25);
+    if(selectAll.code !== 200) return res.status(500).json(selectAll.error);
 
-    res.status(200).json({
-        ok: "ok",
+    return res.status(200).json({
+        ok: "Get all words.",
         body: {
-            allRows
+            records: selectAll.records
         }
-
     })
-
-    next();
-
 }
 
 module.exports = {
