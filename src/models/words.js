@@ -52,7 +52,7 @@ const getAllWords = async (idUser) => {
     
     try {
         
-        const records = await pool.query(`SELECT * FROM ${wordsTable} WHERE idUser = ?`, [idUser]);
+        const [records] = await pool.query(`SELECT * FROM ${wordsTable} WHERE idUser = ?`, [idUser]);
 
         return {
             code: 200,

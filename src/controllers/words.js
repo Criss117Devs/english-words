@@ -49,15 +49,75 @@ const getAll = async (req, res) => {
     if(selectAll.code !== 200) return res.status(500).json(selectAll.error);
 
     return res.status(200).json({
-        ok: "Get all words.",
+        msj: "Get all words.",
         body: {
             records: selectAll.records
         }
-    })
+    });
 }
+
+const ramdomWords = async (req, res) => {
+
+    const { id = "" } = req.body;
+
+    const words = await getAllWords(25);
+
+    if(words.code !== 200) return res.status(500).json(words.error);
+
+    let answers = [];
+
+    const listAswers = [];
+
+    let record = {};
+
+    const total = words.records.length;
+
+    for (record of words.records) {
+
+        answers = ramdomItem(words.records, record, record.id, total);
+
+        listAswers.push({ words: answers});
+    }
+
+    return res.status(200).json({
+        msj: "Riddles.",
+        body: {
+            records: listAswers
+        }
+    });
+}
+
+const ramdomItem = (array, record, id, total) => {
+
+    let list = [];
+
+    list.push(record);
+
+    let ramdom = 0;
+    let word;
+    
+    while (list.length < 5) {
+
+        ramdom = ramdomId(total -1);
+
+        if(id !== ramdom) {
+
+            word = array.find(x => x.id === ramdom);
+
+            list.push(word);
+        }
+    }
+
+    return list;
+
+}
+
+const ramdomId = (total) => { return Math.floor((Math.random() * (total - 0 + 1)) + 0); }
+
 
 module.exports = {
     create,
     update,
-    getAll
+    getAll,
+    ramdomWords
 }
