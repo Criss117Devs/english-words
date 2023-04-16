@@ -33,7 +33,7 @@ const update = async (req, res, next) => {
     }
    
     const update = await updateNote(id, idUser, note, added, status, topic);
-
+    console.log(update);
     if(update != 200) return res.json({
         error: 1,
         msg: update

@@ -18,8 +18,6 @@ const updateNote = async (id, idUser, note, added, status, topic) => {
             [note, added, status, topic, id, idUser]
         );
 
-        logll
-
         return 200;
 
     } catch (error) {
