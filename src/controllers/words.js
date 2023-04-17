@@ -107,6 +107,8 @@ const ramdomItem = (array, record, id, total) => {
             list.push(word);
         }
     }
+    
+    list.push(record);
 
     return list;
 
