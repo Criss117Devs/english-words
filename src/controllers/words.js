@@ -67,8 +67,12 @@ const ramdomWords = async (req, res) => {
 
     if(words.code !== 200) return res.status(500).json(words.error);
 
-    let sorted = [];
-    
+    let sorted = null;
+
+    let firstWord = null;
+
+    let list = [];
+
     let answers = [];
 
     const listAswers = [];
@@ -105,7 +109,17 @@ const ramdomWords = async (req, res) => {
 
     for (let x=0; x<listAswers.length; x++) {
 
-        sorted = listAswers[x].words.sort((p1, p2) => (p1.sort < p2.sort) ? 1 : (p1.sort > p2.sort) ? -1 : 0);
+        list = listAswers[x].words;
+
+        firstWord = list.shift();
+
+        console.log(firstWord);
+
+        sorted = list.sort((p1, p2) => (p1.sort < p2.sort) ? 1 : (p1.sort > p2.sort) ? -1 : 0);
+
+        sorted.push(firstWord);
+
+        sorted.reverse();
 
         listAswers[x].sorted
     }
