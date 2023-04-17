@@ -1,3 +1,4 @@
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 const isEmpty = (object) => {
 
@@ -20,8 +21,17 @@ const isEmpty = (object) => {
             continue: true
         }
     }
-}    
+}
+
+const empty = (string) => {
+
+    if(string != "" || string != undefined || string == null) return true;
+}
+
+const generateRandomLetter = () => { return alphabet[Math.floor(Math.random() * alphabet.length)] }
 
 module.exports = {
-    isEmpty
+    isEmpty,
+    empty,
+    generateRandomLetter
 }

@@ -1,5 +1,6 @@
 
 const { createWord, updateWord, getAllWords } = require("../models/words");
+const { empty, generateRandomLetter } = require("../utils/helpers");
 
 const create = async ( req, res) => {
 
@@ -60,10 +61,14 @@ const ramdomWords = async (req, res) => {
 
     const { id = "" } = req.body;
 
+    let idCustom = "";
+
     const words = await getAllWords(25);
 
     if(words.code !== 200) return res.status(500).json(words.error);
 
+    let sorted = [];
+    
     let answers = [];
 
     const listAswers = [];
@@ -77,6 +82,32 @@ const ramdomWords = async (req, res) => {
         answers = ramdomItem(words.records, record, record.id, total);
 
         listAswers.push({ words: answers});
+    }
+
+    
+    for (let x=0; x<listAswers.length; x++) {
+
+        for (let i=0; i<listAswers[x].words.length; i++) {
+            
+            try {
+                
+                if(empty(listAswers[x].words[i].meaning)) {
+            
+                    listAswers[x].words[i].sort = generateRandomLetter();
+                    
+                }
+
+            } catch (error) {
+                
+            }
+        }
+    }
+
+    for (let x=0; x<listAswers.length; x++) {
+
+        sorted = listAswers[x].words.sort((p1, p2) => (p1.sort < p2.sort) ? 1 : (p1.sort > p2.sort) ? -1 : 0);
+
+        listAswers[x].sorted
     }
 
     return res.status(200).json({
@@ -107,7 +138,7 @@ const ramdomItem = (array, record, id, total) => {
             list.push(word);
         }
     }
-    
+
     list.push(record);
 
     return list;
